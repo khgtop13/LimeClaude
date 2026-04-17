@@ -19,26 +19,27 @@
   --sky-500: #0e8ec2;
   --sky-600: #076fa0;
 
-  /* 배경 / 표면 — lime+sky 균형 중립 */
+  /* 표면 — sky 기조, lime 보조 */
   --surface:        #ffffff;
   --surface-base:   #ffffff;
   --surface-raised: #ffffff;
-  --surface-sub:    #f2f7f9;       /* sky 미세 틴트 */
-  --surface-lime:   #f5fce8;       /* lime 틴트 영역 */
-  --surface-sky:    #edf8ff;       /* sky 틴트 영역 */
+  --surface-sub:    #edf6fb;          /* sky 틴트 앱 배경 */
+  --surface-header: #e4f3fb;          /* 헤더/네비 sky 강조 */
+  --surface-lime:   #f4fce8;          /* lime 틴트 (메뉴·카드 일부) */
+  --surface-sky:    #dff1fb;          /* sky 틴트 (메뉴·카드 일부) */
 
-  /* 보더 */
-  --border:         #cde5ed;       /* sky 기조 */
-  --border-subtle:  #dff0f6;
-  --border-default: #b8d9e8;
-  --border-lime:    #cee99a;       /* lime 보더 필요시 */
+  /* 보더 — sky 기조 */
+  --border:         #b8d9ec;
+  --border-subtle:  #d0ecf8;
+  --border-default: #96cbdf;
+  --border-lime:    #c8e890;
 
-  /* 텍스트 — 중립 다크 (더 이상 lime-dark 아님) */
-  --text-main:      #1a2c35;
-  --text-primary:   #1a2c35;
-  --text-sub:       #3e6070;
-  --text-secondary: #3e6070;
-  --text-muted:     #7fa4b4;
+  /* 텍스트 — sky-dark 기조 */
+  --text-main:      #0f2535;
+  --text-primary:   #0f2535;
+  --text-sub:       #2d5369;
+  --text-secondary: #2d5369;
+  --text-muted:     #6899ae;
 }
 
 @theme inline {
@@ -60,19 +61,9 @@
   --color-sky-300:  var(--sky-300);
   --color-sky-400:  var(--sky-400);
   --color-sky-500:  var(--sky-500);
-
-  --color-surface:     var(--surface);
-  --color-surface-sub: var(--surface-sub);
-  --color-border:      var(--border);
-  --color-text-main:   var(--text-main);
-  --color-text-sub:    var(--text-sub);
-  --color-text-muted:  var(--text-muted);
 }
 
-*,
-*::before,
-*::after { box-sizing: border-box; }
-
+*, *::before, *::after { box-sizing: border-box; }
 html { -webkit-tap-highlight-color: transparent; }
 
 body {
@@ -82,7 +73,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 스크롤바 */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--sky-200); border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: var(--sky-300); border-radius: 99px; }

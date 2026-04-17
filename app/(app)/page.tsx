@@ -55,7 +55,7 @@ export default async function DashboardPage() {
       <div
         className="w-full rounded-3xl p-6 relative overflow-hidden"
         style={{
-          background: "linear-gradient(135deg, var(--lime-100) 0%, var(--sky-100) 100%)",
+          background: "linear-gradient(135deg, var(--sky-100) 0%, var(--lime-100) 100%)",
           border: "1px solid var(--border)",
         }}
       >

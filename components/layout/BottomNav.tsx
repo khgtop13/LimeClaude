@@ -17,7 +17,7 @@ export default function BottomNav() {
   return (
     <nav
       className="sticky bottom-0 z-40 flex justify-around items-center py-2 border-t safe-bottom"
-      style={{ background: "var(--surface-base)", borderColor: "var(--border-subtle)" }}
+      style={{ background: "var(--surface-header)", borderColor: "var(--border)" }}
     >
       {menus.map((m) => {
         const isActive = m.href === "/" ? pathname === "/" : pathname.startsWith(m.href);
