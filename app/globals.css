@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 라임 + 하늘색 파스텔 팔레트 */
+  --lime-50:  #f5fce8;
+  --lime-100: #e8f7c8;
+  --lime-200: #d0ed93;
+  --lime-300: #b3dd57;
+  --lime-400: #97cc2e;
+  --lime-500: #78b314;
+
+  --sky-50:  #f0f9ff;
+  --sky-100: #ddf1fc;
+  --sky-200: #b3e3f8;
+  --sky-300: #7acef2;
+  --sky-400: #38b6e8;
+  --sky-500: #1a9fd4;
+
+  --lime-600: #5e9400;
+  --sky-600:  #0e7fb5;
+
+  --surface:        #ffffff;
+  --surface-base:   #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sub:    #f7faf3;
+  --border:         #e4eecc;
+  --border-subtle:  #eef5dc;
+  --border-default: #d8ebae;
+  --text-main:      #2d3a1e;
+  --text-primary:   #2d3a1e;
+  --text-sub:       #6b7c54;
+  --text-secondary: #6b7c54;
+  --text-muted:     #a8b89a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--surface);
+  --color-foreground: var(--text-main);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* 커스텀 컬러 토큰 */
+  --color-lime-50:  var(--lime-50);
+  --color-lime-100: var(--lime-100);
+  --color-lime-200: var(--lime-200);
+  --color-lime-300: var(--lime-300);
+  --color-lime-400: var(--lime-400);
+  --color-lime-500: var(--lime-500);
+
+  --color-sky-50:   var(--sky-50);
+  --color-sky-100:  var(--sky-100);
+  --color-sky-200:  var(--sky-200);
+  --color-sky-300:  var(--sky-300);
+  --color-sky-400:  var(--sky-400);
+  --color-sky-500:  var(--sky-500);
+
+  --color-surface:     var(--surface);
+  --color-surface-sub: var(--surface-sub);
+  --color-border:      var(--border);
+  --color-text-main:   var(--text-main);
+  --color-text-sub:    var(--text-sub);
+  --color-text-muted:  var(--text-muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface-sub);
+  color: var(--text-main);
+  font-family: var(--font-geist-sans), 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* 스크롤바 */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--lime-200); border-radius: 99px; }
