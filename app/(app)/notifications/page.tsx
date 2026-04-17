@@ -20,7 +20,7 @@ export default async function NotificationsPage() {
     <div className="flex flex-col gap-4 px-4 py-5 max-w-lg mx-auto w-full">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-base font-bold" style={{ color: "var(--text-primary)" }}>🔔 알림함</h1>
+          <h1 className="text-base font-bold" style={{ color: "var(--text-primary)" }}>알림함</h1>
           <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>
             {unreadCount > 0 ? `읽지 않은 알림 ${unreadCount}개` : "모두 읽었어요"}
           </p>

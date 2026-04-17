@@ -24,7 +24,7 @@ export default function BrainstormClientPage({ posts, myId }: { posts: Post[]; m
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>브레인스토밍</h2>
-          <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>자유롭게 아이디어를 나눠요 ✨</p>
+          <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>자유롭게 아이디어를 나눠요</p>
         </div>
         <button onClick={() => setAddOpen(true)}
           className="text-[12px] font-semibold px-3 py-1.5 rounded-full"
@@ -52,7 +52,7 @@ export default function BrainstormClientPage({ posts, myId }: { posts: Post[]; m
           <p className="text-xl font-black" style={{ color: "var(--text-muted)" }}>
             {posts.reduce((s, p) => s + p.reactions.filter((r) => r.type === "like").length, 0)}
           </p>
-          <p className="text-[10px] font-medium" style={{ color: "var(--text-muted)" }}>❤️ 합계</p>
+          <p className="text-[10px] font-medium" style={{ color: "var(--text-muted)" }}>좋아요</p>
         </div>
       </div>
 

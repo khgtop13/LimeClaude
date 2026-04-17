@@ -37,7 +37,7 @@ export default function TravelClientPage({ plans, myId }: { plans: Plan[]; myId:
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>여행 계획</h2>
-          <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>함께 가고 싶은 여행을 기록해요 ✈️</p>
+          <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>함께 떠날 여행을 계획해요</p>
         </div>
         <button onClick={() => setAddOpen(true)}
           className="text-[12px] font-semibold px-3 py-1.5 rounded-full"

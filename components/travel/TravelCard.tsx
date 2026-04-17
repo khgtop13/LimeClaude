@@ -57,7 +57,7 @@ export default function TravelCard({ plan, myId }: { plan: Plan; myId: string })
         <button onClick={() => setOpen(!open)} className="w-full flex items-start gap-3 px-4 py-3 text-left">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>✈️ {plan.title}</span>
+              <span className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>{plan.title}</span>
               <ApprovalBadge status={plan.approval_status} />
               <span className="text-[10px] px-1.5 py-0.5 rounded-full font-semibold"
                 style={{ background: cs.bg, color: cs.color }}>{cs.label}</span>
@@ -90,7 +90,7 @@ export default function TravelCard({ plan, myId }: { plan: Plan; myId: string })
 
             {/* 체크리스트 */}
             <div className="flex flex-col gap-1.5">
-              <p className="text-[11px] font-semibold" style={{ color: "var(--text-secondary)" }}>📋 체크리스트</p>
+              <p className="text-[11px] font-semibold tracking-wide uppercase" style={{ color: "var(--text-muted)" }}>체크리스트</p>
               {sortedChecks.map((c) => (
                 <div key={c.id} className="flex items-center gap-2">
                   <button onClick={() => start(async () => { await toggleChecklistItem(c.id, !c.is_checked); router.refresh(); })}

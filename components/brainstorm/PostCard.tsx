@@ -67,16 +67,16 @@ export default function PostCard({ post, myId }: { post: Post; myId: string }) {
             disabled={isPending}
             className="flex items-center gap-1 text-[12px] px-2.5 py-1 rounded-full transition-all"
             style={{ background: myReact === "like" ? "var(--lime-100)" : "var(--surface-sub)", color: myReact === "like" ? "var(--lime-600)" : "var(--text-muted)", border: `1px solid ${myReact === "like" ? "var(--border-lime)" : "var(--border-subtle)"}` }}>
-            ❤️ {likes}
+            <span className="font-semibold">+{likes}</span> 좋아요
           </button>
           <button onClick={() => start(async () => { await toggleReaction("post", post.id, "dislike"); router.refresh(); })}
             disabled={isPending}
             className="flex items-center gap-1 text-[12px] px-2.5 py-1 rounded-full transition-all"
             style={{ background: myReact === "dislike" ? "#fff5f5" : "var(--surface-sub)", color: myReact === "dislike" ? "#c0392b" : "var(--text-muted)", border: `1px solid ${myReact === "dislike" ? "#fcc" : "var(--border-subtle)"}` }}>
-            💔 {dislikes}
+            <span className="font-semibold">−{dislikes}</span> 별로예요
           </button>
-          <button onClick={() => setOpen(!open)} className="ml-auto text-[11px] flex items-center gap-1" style={{ color: "var(--sky-600)" }}>
-            💬 댓글 {post.comments.filter((c) => !c.is_deleted).length}
+          <button onClick={() => setOpen(!open)} className="ml-auto text-[11px] flex items-center gap-1 font-medium" style={{ color: "var(--sky-600)" }}>
+            댓글 {post.comments.filter((c) => !c.is_deleted).length}
             <span style={{ display: "inline-block", transform: open ? "rotate(180deg)" : "", transition: "transform 0.2s" }}>▾</span>
           </button>
         </div>
@@ -100,9 +100,9 @@ export default function PostCard({ post, myId }: { post: Post; myId: string }) {
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-[10px]" style={{ color: "var(--text-muted)" }}>{c.author_name} · {fmt(c.created_at)}</span>
                     <button onClick={() => start(async () => { await toggleReaction("comment", c.id, "like"); router.refresh(); })}
-                      disabled={isPending} className="text-[10px]" style={{ color: cMine === "like" ? "var(--lime-600)" : "var(--text-muted)" }}>❤️ {cLikes}</button>
+                      disabled={isPending} className="text-[10px] font-semibold" style={{ color: cMine === "like" ? "var(--lime-600)" : "var(--text-muted)" }}>+{cLikes}</button>
                     <button onClick={() => start(async () => { await toggleReaction("comment", c.id, "dislike"); router.refresh(); })}
-                      disabled={isPending} className="text-[10px]" style={{ color: cMine === "dislike" ? "#c0392b" : "var(--text-muted)" }}>💔 {cDislikes}</button>
+                      disabled={isPending} className="text-[10px] font-semibold" style={{ color: cMine === "dislike" ? "#c0392b" : "var(--text-muted)" }}>−{cDislikes}</button>
                   </div>
                 </div>
               );

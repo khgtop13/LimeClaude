@@ -34,7 +34,7 @@ export default function BucketClientPage({ items, myId }: { items: BucketItem[];
       {/* 헤더 */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-base font-bold" style={{ color: "var(--text-primary)" }}>⭐ 버킷리스트</h1>
+          <h1 className="text-base font-bold" style={{ color: "var(--text-primary)" }}>버킷리스트</h1>
           <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>함께 이루고 싶은 것들</p>
         </div>
         <button
@@ -118,7 +118,6 @@ export default function BucketClientPage({ items, myId }: { items: BucketItem[];
       {/* 목록 */}
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center gap-3 py-16">
-          <span className="text-5xl">{filter === "done" ? "🏆" : "⭐"}</span>
           <p className="text-sm font-medium" style={{ color: "var(--text-muted)" }}>
             {filter === "done" ? "완료된 버킷이 없어요" : "버킷리스트가 비어있어요"}
           </p>
