@@ -26,7 +26,7 @@ export default function BottomNav() {
             key={m.href}
             href={m.href}
             className="flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg transition-colors"
-            style={{ color: isActive ? "var(--lime-500)" : "var(--text-muted)" }}
+            style={{ color: isActive ? "var(--sky-500)" : "var(--text-muted)" }}
           >
             <span
               className="text-[11px] font-black"

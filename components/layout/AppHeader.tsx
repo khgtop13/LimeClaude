@@ -35,12 +35,10 @@ export default async function AppHeader() {
       className="sticky top-0 z-40 flex items-center justify-between px-4 py-2.5 border-b"
       style={{ background: "var(--surface-base)", borderColor: "var(--border-subtle)" }}
     >
-      <Link
-        href="/"
-        className="font-black text-xl tracking-tighter select-none"
-        style={{ color: "var(--lime-500)", letterSpacing: "-0.06em" }}
-      >
-        LC
+      {/* L=lime, C=sky 로고 */}
+      <Link href="/" className="font-black text-xl select-none" style={{ letterSpacing: "-0.06em" }}>
+        <span style={{ color: "var(--lime-500)" }}>L</span>
+        <span style={{ color: "var(--sky-500)" }}>C</span>
       </Link>
 
       <div className="flex gap-1.5">

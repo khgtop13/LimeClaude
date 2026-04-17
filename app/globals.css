@@ -1,45 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  /* 라임 + 하늘색 파스텔 팔레트 */
-  --lime-50:  #f5fce8;
-  --lime-100: #e8f7c8;
-  --lime-200: #d0ed93;
-  --lime-300: #b3dd57;
-  --lime-400: #97cc2e;
-  --lime-500: #78b314;
+  /* 라임 팔레트 */
+  --lime-50:  #f4fce8;
+  --lime-100: #e5f7c2;
+  --lime-200: #ccee88;
+  --lime-300: #aedd48;
+  --lime-400: #8ec928;
+  --lime-500: #6fa810;
+  --lime-600: #538000;
 
-  --sky-50:  #f0f9ff;
-  --sky-100: #ddf1fc;
-  --sky-200: #b3e3f8;
-  --sky-300: #7acef2;
-  --sky-400: #38b6e8;
-  --sky-500: #1a9fd4;
+  /* 하늘색 팔레트 */
+  --sky-50:  #edf8ff;
+  --sky-100: #d6f0fd;
+  --sky-200: #a8ddf9;
+  --sky-300: #68c5f4;
+  --sky-400: #2eaadf;
+  --sky-500: #0e8ec2;
+  --sky-600: #076fa0;
 
-  --lime-600: #5e9400;
-  --sky-600:  #0e7fb5;
-
+  /* 배경 / 표면 — lime+sky 균형 중립 */
   --surface:        #ffffff;
   --surface-base:   #ffffff;
   --surface-raised: #ffffff;
-  --surface-sub:    #f7faf3;
-  --border:         #e4eecc;
-  --border-subtle:  #eef5dc;
-  --border-default: #d8ebae;
-  --text-main:      #2d3a1e;
-  --text-primary:   #2d3a1e;
-  --text-sub:       #6b7c54;
-  --text-secondary: #6b7c54;
-  --text-muted:     #a8b89a;
+  --surface-sub:    #f2f7f9;       /* sky 미세 틴트 */
+  --surface-lime:   #f5fce8;       /* lime 틴트 영역 */
+  --surface-sky:    #edf8ff;       /* sky 틴트 영역 */
+
+  /* 보더 */
+  --border:         #cde5ed;       /* sky 기조 */
+  --border-subtle:  #dff0f6;
+  --border-default: #b8d9e8;
+  --border-lime:    #cee99a;       /* lime 보더 필요시 */
+
+  /* 텍스트 — 중립 다크 (더 이상 lime-dark 아님) */
+  --text-main:      #1a2c35;
+  --text-primary:   #1a2c35;
+  --text-sub:       #3e6070;
+  --text-secondary: #3e6070;
+  --text-muted:     #7fa4b4;
 }
 
 @theme inline {
-  --color-background: var(--surface);
+  --color-background: var(--surface-sub);
   --color-foreground: var(--text-main);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* 커스텀 컬러 토큰 */
   --color-lime-50:  var(--lime-50);
   --color-lime-100: var(--lime-100);
   --color-lime-200: var(--lime-200);
@@ -64,13 +71,9 @@
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
-html {
-  -webkit-tap-highlight-color: transparent;
-}
+html { -webkit-tap-highlight-color: transparent; }
 
 body {
   background: var(--surface-sub);
@@ -82,4 +85,4 @@ body {
 /* 스크롤바 */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--lime-200); border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: var(--sky-200); border-radius: 99px; }

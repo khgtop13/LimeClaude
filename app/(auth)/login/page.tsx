@@ -138,7 +138,7 @@ export default function LoginPage() {
           transition: border-color 0.15s;
         }
         .field-input:focus {
-          border-color: var(--lime-400);
+          border-color: var(--sky-400);
         }
         .field-error {
           font-size: 0.8125rem;
@@ -147,16 +147,16 @@ export default function LoginPage() {
         }
         .btn-primary {
           padding: 0.75rem;
-          background: var(--lime-400);
+          background: linear-gradient(90deg, var(--lime-400) 0%, var(--sky-400) 100%);
           color: #fff;
           border: none;
           border-radius: 0.625rem;
           font-size: 0.9375rem;
           font-weight: 600;
           cursor: pointer;
-          transition: background 0.15s;
+          transition: opacity 0.15s;
         }
-        .btn-primary:hover { background: var(--lime-500); }
+        .btn-primary:hover { opacity: 0.88; }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
         .btn-full { width: 100%; }
       `}</style>
