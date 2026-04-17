@@ -45,6 +45,16 @@ export async function submitApproval(
     requesterId: user.id,
   });
 
+  // 엔티티 승인 상태 pending으로 업데이트
+  const table = TABLE_MAP[entityType];
+  if (table) {
+    if (actionType === "complete") {
+      await supabase.from(table).update({ completion_status: "complete_pending" }).eq("id", entityId);
+    } else {
+      await supabase.from(table).update({ approval_status: "pending" }).eq("id", entityId);
+    }
+  }
+
   return requestId as string;
 }
 
