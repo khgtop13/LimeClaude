@@ -7,8 +7,9 @@ const menus = [
   { href: "/calendar",      abbr: "CAL", label: "달력",         accent: "lime" },
   { href: "/bucket",        abbr: "BKT", label: "버킷리스트",   accent: "sky"  },
   { href: "/map",           abbr: "MAP", label: "지도",         accent: "lime" },
-  { href: "/brainstorm",    abbr: "BST", label: "브레인스토밍", accent: "sky"  },
-  { href: "/notifications", abbr: "ALM", label: "알림함",       accent: "lime" },
+  { href: "/travel",        abbr: "TRV", label: "여행",         accent: "sky"  },
+  { href: "/brainstorm",    abbr: "BST", label: "브레인스토밍", accent: "lime" },
+  { href: "/notifications", abbr: "ALM", label: "알림함",       accent: "sky"  },
 ] as const;
 
 const accentColor = {

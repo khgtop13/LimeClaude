@@ -7,7 +7,7 @@ const menus = [
   { href: "/calendar",     abbr: "CAL",  label: "달력" },
   { href: "/bucket",       abbr: "BKT",  label: "버킷" },
   { href: "/map",          abbr: "MAP",  label: "지도" },
-  { href: "/brainstorm",   abbr: "BST",  label: "브레인" },
+  { href: "/travel",       abbr: "TRV",  label: "여행" },
   { href: "/notifications",abbr: "ALM",  label: "알림" },
 ];
 
