@@ -1,9 +1,9 @@
 interface UserCardProps {
   initial: string;
   displayName: string;
-  emotion?: string | null;   // emoji
-  accentVar: string;         // CSS var, e.g. "var(--lime-400)"
-  bgVar: string;             // CSS var, e.g. "var(--lime-50)"
+  emotion?: string | null;
+  accentVar: string;
+  bgVar: string;
   isSelf?: boolean;
 }
 
@@ -11,28 +11,30 @@ export default function UserCard({
   initial, displayName, emotion, accentVar, bgVar, isSelf,
 }: UserCardProps) {
   return (
-    <div
-      className="flex items-center gap-2 px-3 py-1.5 rounded-xl"
-      style={{ background: bgVar, border: "1px solid var(--border-subtle)" }}
-    >
+    <div className="flex items-center gap-1.5">
       <div className="relative">
-        <span
-          className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
-          style={{ background: accentVar }}
+        <div
+          className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white"
+          style={{
+            background: accentVar,
+            boxShadow: `0 2px 8px ${accentVar}55`,
+          }}
         >
           {initial}
-        </span>
+        </div>
         {emotion && (
-          <span className="absolute -bottom-0.5 -right-1 text-[10px] leading-none">
+          <span className="absolute -bottom-0.5 -right-1 text-[13px] leading-none drop-shadow-sm">
             {emotion}
           </span>
         )}
       </div>
       <div className="flex flex-col">
-        <span className="text-[11px] font-semibold leading-tight" style={{ color: "var(--text-primary)" }}>
+        <span className="text-[12px] font-semibold leading-tight" style={{ color: "var(--text-primary)" }}>
           {displayName}
-          {isSelf && <span className="ml-1 text-[9px] font-normal" style={{ color: "var(--text-muted)" }}>나</span>}
         </span>
+        {isSelf && (
+          <span className="text-[9px] font-medium" style={{ color: "var(--text-muted)" }}>나</span>
+        )}
       </div>
     </div>
   );

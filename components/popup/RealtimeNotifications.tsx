@@ -2,11 +2,12 @@
 import { useEffect, useRef, useState } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 
-interface Toast {
-  id: string;
-  title: string;
-  body?: string | null;
-}
+interface Toast { id: string; title: string; body?: string | null; type?: string; }
+
+const typeIcon: Record<string, string> = {
+  approval_request: "✅", schedule: "📅", birthday: "🎂",
+  travel: "✈️", brainstorm: "💡", general: "🔔",
+};
 
 export default function RealtimeNotifications({ userId }: { userId: string }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
@@ -23,88 +24,69 @@ export default function RealtimeNotifications({ userId }: { userId: string }) {
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
-
     const channel = supabase
       .channel("notifications-realtime")
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "notifications",
-          filter: `recipient_id=eq.${userId}`,
-        },
-        (payload) => {
-          const n = payload.new as { id: string; title: string; body?: string };
-          const toast: Toast = { id: n.id, title: n.title, body: n.body };
-          setToasts((prev) => [toast, ...prev].slice(0, 3));
-          const timer = setTimeout(() => dismiss(n.id), 5000);
-          timerRef.current.set(n.id, timer);
-        }
-      )
+      .on("postgres_changes", {
+        event: "INSERT", schema: "public",
+        table: "notifications", filter: `recipient_id=eq.${userId}`,
+      }, (payload) => {
+        const n = payload.new as { id: string; title: string; body?: string; type?: string };
+        const toast: Toast = { id: n.id, title: n.title, body: n.body, type: n.type };
+        setToasts((prev) => [toast, ...prev].slice(0, 3));
+        const timer = setTimeout(() => dismiss(n.id), 5000);
+        timerRef.current.set(n.id, timer);
+      })
       .subscribe();
-
     return () => { supabase.removeChannel(channel); };
   }, [userId]);
 
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed top-16 right-3 z-50 flex flex-col gap-2 w-72">
+    <div style={{ position: "fixed", top: "72px", right: "12px", zIndex: 50, display: "flex", flexDirection: "column", gap: "8px", width: "280px" }}>
       {toasts.map((t) => (
         <div
           key={t.id}
           onClick={() => dismiss(t.id)}
-          className="toast-card"
+          style={{
+            background: "rgba(255,255,255,0.95)",
+            backdropFilter: "blur(16px)",
+            border: "1px solid var(--border-subtle)",
+            borderRadius: "1.25rem",
+            padding: "0.75rem 0.875rem",
+            boxShadow: "var(--shadow-lg)",
+            cursor: "pointer",
+            animation: "slideDown 0.25s cubic-bezier(0.32,0.72,0,1)",
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "0.625rem",
+          }}
         >
-          <div className="flex items-start justify-between gap-2">
-            <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-              <p className="toast-title">{t.title}</p>
-              {t.body && <p className="toast-body">{t.body}</p>}
-            </div>
-            <button className="toast-close" aria-label="닫기">✕</button>
+          <div style={{
+            width: "32px", height: "32px", borderRadius: "0.625rem", flexShrink: 0,
+            background: "linear-gradient(135deg, var(--lime-100), var(--sky-100))",
+            border: "1px solid var(--border-subtle)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "16px",
+          }}>
+            {typeIcon[t.type ?? "general"] ?? "🔔"}
           </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--text-primary)", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {t.title}
+            </p>
+            {t.body && (
+              <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", margin: "2px 0 0", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                {t.body}
+              </p>
+            )}
+          </div>
+          <button
+            style={{ background: "none", border: "none", cursor: "pointer", fontSize: "0.75rem", color: "var(--text-muted)", flexShrink: 0, padding: "2px" }}
+            aria-label="닫기"
+          >✕</button>
         </div>
       ))}
-      <style jsx>{`
-        .toast-card {
-          background: var(--surface-header);
-          border: 1.5px solid var(--sky-300);
-          border-radius: 0.875rem;
-          padding: 0.75rem 0.875rem;
-          box-shadow: 0 4px 16px rgba(14,142,194,0.12);
-          cursor: pointer;
-          animation: slideIn 0.2s ease;
-        }
-        @keyframes slideIn {
-          from { opacity: 0; transform: translateY(-8px) scale(0.97); }
-          to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .toast-title {
-          font-size: 0.8125rem;
-          font-weight: 600;
-          color: var(--text-primary);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .toast-body {
-          font-size: 0.75rem;
-          color: var(--text-secondary);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .toast-close {
-          font-size: 0.7rem;
-          color: var(--text-muted);
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-          flex-shrink: 0;
-        }
-      `}</style>
     </div>
   );
 }

@@ -1,45 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  /* 라임 팔레트 */
-  --lime-50:  #f4fce8;
-  --lime-100: #e5f7c2;
-  --lime-200: #ccee88;
-  --lime-300: #aedd48;
-  --lime-400: #8ec928;
-  --lime-500: #6fa810;
-  --lime-600: #538000;
+  /* ── 라임 팔레트 ── */
+  --lime-50:  #f2fce4;
+  --lime-100: #e1f7bb;
+  --lime-200: #c8ee80;
+  --lime-300: #a8dd42;
+  --lime-400: #86c923;
+  --lime-500: #64a80e;
+  --lime-600: #4a8000;
 
-  /* 하늘색 팔레트 */
+  /* ── 하늘색 팔레트 ── */
   --sky-50:  #edf8ff;
-  --sky-100: #d6f0fd;
-  --sky-200: #a8ddf9;
-  --sky-300: #68c5f4;
-  --sky-400: #2eaadf;
-  --sky-500: #0e8ec2;
-  --sky-600: #076fa0;
+  --sky-100: #d4effd;
+  --sky-200: #a2dbfb;
+  --sky-300: #5ebff5;
+  --sky-400: #1fa3e0;
+  --sky-500: #0685c2;
+  --sky-600: #006aa0;
 
-  /* 표면 — sky 기조, lime 보조 */
+  /* ── 표면 ── */
   --surface:        #ffffff;
   --surface-base:   #ffffff;
   --surface-raised: #ffffff;
-  --surface-sub:    #edf6fb;          /* sky 틴트 앱 배경 */
-  --surface-header: #e4f3fb;          /* 헤더/네비 sky 강조 */
-  --surface-lime:   #f4fce8;          /* lime 틴트 (메뉴·카드 일부) */
-  --surface-sky:    #dff1fb;          /* sky 틴트 (메뉴·카드 일부) */
+  --surface-sub:    #f0f8fe;
+  --surface-header: #e8f4fc;
+  --surface-lime:   #f2fce4;
+  --surface-sky:    #dff1fb;
+  --surface-card:   #ffffff;
 
-  /* 보더 — sky 기조 */
-  --border:         #b8d9ec;
-  --border-subtle:  #d0ecf8;
-  --border-default: #96cbdf;
-  --border-lime:    #c8e890;
+  /* ── 보더 ── */
+  --border:         #b4d6ec;
+  --border-subtle:  #cce8f5;
+  --border-default: #90c4de;
+  --border-lime:    #c0e478;
 
-  /* 텍스트 — sky-dark 기조 */
-  --text-main:      #0f2535;
-  --text-primary:   #0f2535;
-  --text-sub:       #2d5369;
-  --text-secondary: #2d5369;
-  --text-muted:     #6899ae;
+  /* ── 텍스트 ── */
+  --text-main:      #0d2233;
+  --text-primary:   #0d2233;
+  --text-sub:       #27506a;
+  --text-secondary: #27506a;
+  --text-muted:     #6490a8;
+
+  /* ── 그림자 ── */
+  --shadow-xs:  0 1px 3px rgba(13,34,51,0.06);
+  --shadow-sm:  0 2px 8px rgba(13,34,51,0.08), 0 0 0 1px rgba(13,34,51,0.04);
+  --shadow-md:  0 4px 16px rgba(13,34,51,0.10), 0 1px 4px rgba(13,34,51,0.06);
+  --shadow-lg:  0 8px 32px rgba(13,34,51,0.12), 0 2px 8px rgba(13,34,51,0.06);
+  --shadow-xl:  0 16px 48px rgba(13,34,51,0.15), 0 4px 12px rgba(13,34,51,0.08);
+  --shadow-lime: 0 4px 16px rgba(134,201,35,0.22);
+  --shadow-sky:  0 4px 16px rgba(31,163,224,0.20);
+
+  /* ── 반경 ── */
+  --radius-sm:  0.5rem;
+  --radius-md:  0.875rem;
+  --radius-lg:  1.25rem;
+  --radius-xl:  1.75rem;
+  --radius-2xl: 2rem;
 }
 
 @theme inline {
@@ -63,16 +80,176 @@
   --color-sky-500:  var(--sky-500);
 }
 
+/* ── 리셋 & 베이스 ── */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-tap-highlight-color: transparent; }
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--surface-sub);
   color: var(--text-main);
-  font-family: var(--font-geist-sans), 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-family: var(--font-geist-sans), 'Apple SD Gothic Neo', 'Pretendard', 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
 }
 
-::-webkit-scrollbar { width: 4px; height: 4px; }
+/* ── 스크롤바 ── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--sky-300); border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: var(--sky-200); border-radius: 99px; }
+
+/* ── 포커스 링 제거 (터치 디바이스) ── */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--sky-400);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── 인풋 공통 스타일 ── */
+input, textarea, select {
+  font-family: inherit;
+}
+
+input[type="date"] {
+  color-scheme: light;
+}
+
+/* ── 버튼 전환 효과 ── */
+button {
+  transition: opacity 0.15s ease, transform 0.12s ease, background 0.15s ease;
+}
+button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── 링크 전환 ── */
+a {
+  transition: opacity 0.15s ease, transform 0.12s ease;
+}
+a:active {
+  transform: scale(0.97);
+}
+
+/* ── 카드 공통 ── */
+.card {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ── 인풋 공통 ── */
+.input-base {
+  width: 100%;
+  padding: 0.6rem 0.875rem;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-sub);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input-base:focus {
+  border-color: var(--sky-400);
+  box-shadow: 0 0 0 3px rgba(31,163,224,0.12);
+}
+
+/* ── 시트 (bottom sheet) ── */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(13,34,51,0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.2s ease;
+}
+
+.sheet-panel {
+  width: 100%;
+  background: var(--surface-base);
+  border-radius: 1.5rem 1.5rem 0 0;
+  padding: 0.75rem 1.25rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 92dvh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.sheet-handle {
+  width: 2.75rem;
+  height: 4px;
+  background: var(--border);
+  border-radius: 99px;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.sheet-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+/* ── 애니메이션 ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-12px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+/* ── 뱃지 ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* ── 그라데이션 텍스트 ── */
+.gradient-text-lime-sky {
+  background: linear-gradient(90deg, var(--lime-500), var(--sky-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── safe area ── */
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
