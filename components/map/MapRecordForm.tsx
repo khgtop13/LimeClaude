@@ -2,7 +2,6 @@
 import { useState, useTransition, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createMapRecord, updateMapRecord } from "@/features/map/actions";
-import MapView from "./MapView";
 
 interface Record {
   id: string; title: string; address?: string | null; comment?: string | null;
@@ -19,9 +18,9 @@ const WEATHERS = [
 export default function MapRecordForm({ record, onClose }: Props) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
-  const [pin, setPin] = useState<{ lat: number; lng: number } | null>(
-    record?.lat && record?.lng ? { lat: record.lat, lng: record.lng } : null
-  );
+  const [latStr, setLatStr] = useState(record?.lat ? String(record.lat) : "");
+  const [lngStr, setLngStr] = useState(record?.lng ? String(record.lng) : "");
+  const pin = latStr && lngStr ? { lat: parseFloat(latStr), lng: parseFloat(lngStr) } : null;
   const [weather, setWeather] = useState(record?.weather ?? "");
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -49,25 +48,6 @@ export default function MapRecordForm({ record, onClose }: Props) {
       <div className="sheet" onClick={(e) => e.stopPropagation()}>
         <div className="sheet-handle" />
         <p className="sheet-title">{record ? "장소 수정" : "장소 추가"}</p>
-
-        {/* 지도 핀 선택 */}
-        <div style={{ height: "220px", borderRadius: "0.875rem", overflow: "hidden", border: "1px solid var(--border)" }}>
-          <MapView
-            records={[]}
-            pickMode
-            onPinPlace={(lat, lng) => setPin({ lat, lng })}
-            selectedPin={pin}
-          />
-        </div>
-        {pin ? (
-          <p className="text-[11px] text-center" style={{ color: "var(--sky-600)" }}>
-            📍 {pin.lat.toFixed(5)}, {pin.lng.toFixed(5)} — 지도를 클릭해 위치 변경
-          </p>
-        ) : (
-          <p className="text-[11px] text-center" style={{ color: "var(--text-muted)" }}>
-            지도를 클릭해 장소를 핀으로 표시하세요
-          </p>
-        )}
 
         <form ref={formRef} onSubmit={handleSubmit} className="form">
           <div className="field">
@@ -97,6 +77,16 @@ export default function MapRecordForm({ record, onClose }: Props) {
                   {w.label}
                 </button>
               ))}
+            </div>
+          </div>
+          <div className="row2">
+            <div className="field">
+              <label className="label">위도 (선택)</label>
+              <input value={latStr} onChange={(e) => setLatStr(e.target.value)} placeholder="예: 37.5512" className="input" inputMode="decimal" />
+            </div>
+            <div className="field">
+              <label className="label">경도 (선택)</label>
+              <input value={lngStr} onChange={(e) => setLngStr(e.target.value)} placeholder="예: 126.9882" className="input" inputMode="decimal" />
             </div>
           </div>
           <div className="field">
